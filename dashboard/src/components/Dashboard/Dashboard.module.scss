@@ -1,0 +1,70 @@
+.Dashboard {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  padding: 2rem;
+
+  .container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(100, 1fr);
+    grid-template-rows: repeat(100, 1fr);
+    column-gap: 10px;
+
+    .sectionContainer {
+      border: 2px solid #808080;
+      border-radius: 8px;
+      background-color: #f0f0f0;
+      box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.5);
+      padding: 0.8rem;
+      position: relative;
+
+      &.temp {
+        grid-column: 1 / 10;
+        grid-row: 1 / -1;
+      }
+
+      &.alarms {
+        grid-column: 13 / 76;
+        grid-row: 1 / 18;
+        box-shadow: none;
+        padding: 0.4rem;
+        font-size: 0.8rem;
+      }
+
+      &.fuel {
+        grid-column: 17 / 39;
+        grid-row: 22 / 62;
+      }
+
+      &.battery {
+        grid-column: 47 / 69;
+        grid-row: 22 / 62;
+      }
+
+      &.signal {
+        grid-column: 79 / -1;
+        grid-row: 1 / 41;
+      }
+
+      &.extra {
+        grid-column: 13 / 76;
+        grid-row: 68 / -1;
+        box-shadow: none;
+        padding: 3px 0 9px 0;
+      }
+
+      &.stats {
+        grid-column: 79 / -1;
+        grid-row: 1 / 43;
+      }
+
+      &.maint {
+        grid-column: 79 / -1;
+        grid-row: 45 / -1;
+        transition: all 0.5s ease-out;
+      }
+    }
+  }
+}

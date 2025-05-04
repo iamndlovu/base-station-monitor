@@ -1,0 +1,58 @@
+.AlarmListItem {
+  text-transform: uppercase;
+  padding: 0.15rem 0.7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  border-radius: 7px;
+
+  &.alarm-danger {
+    animation: blink-bg-danger 1s infinite;
+  }
+
+  &.alarm-success {
+    background-color: rgb(12, 245, 12);
+  }
+
+  &.alarm-warning {
+    animation: blink-bg-warning 2s infinite;
+  }
+
+  & > span {
+    background-color: #e9ecef;
+    color: #333;
+    font-weight: 700;
+
+    &:first-child {
+      width: 20%;
+    }
+
+    &:last-child {
+      width: 75%;
+      & > span:first-child {
+        margin-right: 2rem;
+      }
+    }
+  }
+
+  @keyframes blink-bg-danger {
+    0%,
+    100% {
+      background-color: #dd616b;
+    }
+    50% {
+      background-color: #ffffff;
+    }
+  }
+
+  @keyframes blink-bg-warning {
+    0%,
+    100% {
+      background-color: #e7c713;
+    }
+    50% {
+      background-color: #ffffff;
+    }
+  }
+}

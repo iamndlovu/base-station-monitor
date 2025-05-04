@@ -1,0 +1,97 @@
+.UserListItem {
+  width: 100%;
+  border: 2px solid #808080;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.5);
+  padding: 0.8rem;
+  position: relative;
+  border: 2px solid #808080;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.5);
+  padding: 0.8rem;
+  position: relative;
+
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: all 0.3s ease;
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    tr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #ccc;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      td {
+        flex: 1;
+        text-align: left;
+        padding: 0.5rem 0;
+        font-size: 1rem;
+        color: #333;
+
+        &:first-child {
+          font-weight: bold;
+          color: #000;
+        }
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+
+      &.delete {
+        background-color: #dc3545;
+
+        &:hover {
+          background-color: #c82333;
+        }
+      }
+      &.edit {
+        background-color: #28a745;
+
+        &:hover {
+          background-color: #218838;
+        }
+      }
+    }
+  }
+}

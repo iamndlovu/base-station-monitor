@@ -1,0 +1,34 @@
+.Maintenance {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  & > h1 {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    margin-bottom: 0rem;
+    text-decoration: underline;
+    text-align: center;
+    transform: translateY(-0.5rem);
+  }
+
+  & > section {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    & > div {
+      background-color: red;
+      width: 95%;
+      color: #444;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      grid-auto-rows: max-content;
+      row-gap: 2rem;
+    }
+  }
+}

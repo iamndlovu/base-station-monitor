@@ -1,0 +1,36 @@
+{
+  "name": "base-station-monitor",
+  "version": "0.1.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "client-install": "npm install --prefix dashboard",
+    "server-install": "npm install --prefix server",
+    "ml-prediction-install": "npm install --prefix server/ml-prediction-server",
+    "install-all": "concurrently \"npm install\" \"npm:client-install\" \"npm:server-install\" \"npm:ml-prediction-install\"",
+    "dev-server": "npm run dev --prefix server",
+    "dev-ml-prediction": "npm run dev --prefix server/ml-prediction-server",
+    "server": "npm start --prefix server",
+    "client": "npm start --prefix dashboard",
+    "ml-prediction": "npm start --prefix server/ml-prediction-server",
+    "dev": "concurrently \"npm:dev-server\" \"npm:client\" \"npm:dev-ml-prediction\"",
+    "start": "concurrently \"npm:server\" \"npm:ml-prediction\" \"cd dashboard && serve -s build\"",
+    "build": "npm run build --prefix dashboard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamndlovu/base-station-monitor.git"
+  },
+  "author": "Pardon Ndlovu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iamndlovu/base-station-monitor/issues"
+  },
+  "homepage": "https://github.com/iamndlovu/base-station-monitor#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "axios": "^1.8.4"
+  }
+}
