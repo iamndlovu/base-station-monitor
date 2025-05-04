@@ -9,11 +9,11 @@ const AssetSchema = new Schema(
     },
     lifeSpan: {
       type: Array,
-      required: true,
+      default: [],
     },
     maintenanceDue: {
       type: Array,
-      required: true,
+      default: [],
     },
   },
   { timestamps: true }

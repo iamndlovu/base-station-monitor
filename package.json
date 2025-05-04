@@ -12,6 +12,7 @@
     "dev-ml-prediction": "npm run dev --prefix server/ml-prediction-server",
     "server": "npm start --prefix server",
     "client": "npm start --prefix dashboard",
+    "backend": "concurrently \"npm:server\" \"npm:ml-prediction\"",
     "ml-prediction": "npm start --prefix server/ml-prediction-server",
     "dev": "concurrently \"npm:dev-server\" \"npm:client\" \"npm:dev-ml-prediction\"",
     "start": "concurrently \"npm:server\" \"npm:ml-prediction\" \"cd dashboard && serve -s build\"",
