@@ -1,0 +1,49 @@
+#include <Wire.h>
+#include <Adafruit_INA219.h>
+
+Adafruit_INA219 ina219;
+
+float busvoltage = 0;
+float current_mA = 0;
+float power_mW = 0;
+
+void setup()
+{
+  Serial.begin(9600);
+
+  while (!Serial) {
+      // will pause Zero, Leonardo, etc until serial console opens
+      delay(1);
+  }
+  
+  Serial.println("ESP32 POWER MONITOR");
+
+  if (!ina219.begin())
+  {
+    Serial.println("\n\nFailed to find INA219 module");
+    while (1)
+    {
+      delay(10);
+    }
+  }
+}
+
+void loop()
+{
+  measureValues();
+}
+
+void measureValues()
+{
+  busvoltage = ina219.getBusVoltage_V();
+  current_mA = ina219.getCurrent_mA();
+  power_mW = ina219.getPower_mW();
+
+  Serial.print("\nV: ");
+  Serial.println(busvoltage);
+  Serial.print("\nI:");
+  Serial.println(current_mA);
+  Serial.print("\nPower(mW):");
+  Serial.println((int)power_mW);
+  delay(3000);
+}
