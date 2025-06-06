@@ -30,8 +30,8 @@ class AnalogConstants {
 #define FAN_RUNNING_PIN  2 // Pin to check if the fan is running
 #define SIGNAL_STRENGTH_PIN  34 // Pin to read the signal strength
 
-#define fullTankPingVal_cm 10 // Distance in cm when the tank is full
-#define emptyTankPingVal_cm 20 // Distance in cm when the tank is empty
+#define fullTankPingVal_cm 3 // Distance in cm when the tank is full
+#define emptyTankPingVal_cm 25 // Distance in cm when the tank is empty
 #define MAX_BATTERY_MV 3000 // Maximum battery voltage in mV
 #define MIN_BATTERY_MV 142 // Minimum battery voltage in mV
 #define MAX_SIGNAL_STRENGTH_MV 3100 // Maximum signal strength in mV
@@ -42,7 +42,7 @@ float current_mA = 0;
 float power_mW = 0;
 unsigned long lastSampleTime = 0;
 const float BATTERY_CAPACITY_MAH = 3000.0;
-const float VOLTAGE_FULL_CHARGE = 3.8; // Voltage when battery is considered 100% full
+const float VOLTAGE_FULL_CHARGE = 3.4; // Voltage when battery is considered 100% full
 const float VOLTAGE_EMPTY = 1.9; // Voltage when battery is considered empty
 const unsigned long SAMPLE_INTERVAL_MS = 1500;
 float current_mAh = 0.0;    // Accumulated charge/discharge in mAh (Represents remaining capacity)
@@ -170,15 +170,17 @@ void loop() {
   Serial.println("ºC");
 
   if (temperatureC < temperatureConstants.h) {
-    digitalWrite(FAN_RUNNING_PIN, HIGH); // Turn OFF the fan
+    digitalWrite(FAN_RUNNING_PIN, LOW); // Turn OFF the fan
   } else {
-    digitalWrite(FAN_RUNNING_PIN, LOW); // Turn ON the fan
-    Serial.println("ON");
+    digitalWrite(FAN_RUNNING_PIN, HIGH); // Turn ON the fan
   }
 
   // Request distance from the ultrasonic sensor
   float distance_cm = sonar.ping_cm(); // Send ping, get distance in cm (0 = outside set distance range)
   float level = 100 - (100 * (distance_cm - fullTankPingVal_cm) / (emptyTankPingVal_cm - fullTankPingVal_cm));
+  if (level > 110) {
+    level = 0;
+  }
   // Print the level
   Serial.print("Level: ");
   Serial.print(level);
@@ -186,6 +188,9 @@ void loop() {
   
 // Read the battery voltage
   battery_percentage = map(analogReadMilliVolts(35), MIN_BATTERY_MV, MAX_BATTERY_MV, 0, 100);
+  if (battery_percentage > 100) {
+    battery_percentage = 100;
+  }
   Serial.print("battery: ");
   Serial.print(battery_percentage);
   Serial.println(" %");
@@ -193,6 +198,9 @@ void loop() {
   // Read the signal strength
   int signalMV = analogReadMilliVolts(SIGNAL_STRENGTH_PIN);
   int signalStrength = map(signalMV, MIN_SIGNAL_STRENGTH_MV, MAX_SIGNAL_STRENGTH_MV, 0, 100);
+  if (signalStrength > 100) {
+    signalStrength = 100;
+  }
   Serial.print("Signal Strength: ");
   Serial.print(signalMV);
   Serial.print(" mV, ");
@@ -208,7 +216,7 @@ void loop() {
   Serial.print("UPS Running: ");
   Serial.println(upsRunning ? "Yes" : "No");
   // Read the fan status
-  bool fanRunning = !digitalRead(FAN_RUNNING_PIN);
+  bool fanRunning = digitalRead(FAN_RUNNING_PIN);
   Serial.print("Fan Running: ");
   Serial.println(fanRunning ? "Yes" : "No");
 
